@@ -54,21 +54,32 @@ class ContentSecurityPolicy extends BaseConfig
      *
      * @var list<string>|string
      */
-    public $scriptSrc = 'self';
+    public $scriptSrc = [
+        'self',
+        'https://www.sparkawards.com',
+    ];
 
     /**
      * Lists allowed stylesheets' URLs.
      *
      * @var list<string>|string
      */
-    public $styleSrc = 'self';
+    public $styleSrc = [
+        'self',
+        'https://fonts.googleapis.com',
+        'unsafe-inline',
+    ];
 
     /**
      * Defines the origins from which images can be loaded.
      *
      * @var list<string>|string
      */
-    public $imageSrc = 'self';
+    public $imageSrc = [
+        'self',
+        'data:',
+        'https://www.sparkawards.com',
+    ];
 
     /**
      * Restricts the URLs that can appear in a page's `<base>` element.
@@ -99,7 +110,10 @@ class ContentSecurityPolicy extends BaseConfig
      *
      * @var list<string>|string
      */
-    public $fontSrc;
+    public $fontSrc = [
+        'self',
+        'https://fonts.gstatic.com',
+    ];
 
     /**
      * Lists valid endpoints for submission from `<form>` tags.
@@ -124,21 +138,27 @@ class ContentSecurityPolicy extends BaseConfig
      *
      * @var list<string>|string|null
      */
-    public $frameSrc;
+    public $frameSrc = [
+        'self',
+        'https://www.youtube.com',
+        'https://www.youtube-nocookie.com',
+    ];
 
     /**
      * Restricts the origins allowed to deliver video and audio.
      *
      * @var list<string>|string|null
      */
-    public $mediaSrc;
+    public $mediaSrc = [
+        'self',
+    ];
 
     /**
      * Allows control over Flash and other plugins.
      *
      * @var list<string>|string
      */
-    public $objectSrc = 'self';
+    public $objectSrc = 'none';
 
     /**
      * @var list<string>|string|null

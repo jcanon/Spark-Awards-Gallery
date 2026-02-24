@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="D:\MAMP\Spark-Awards-Gallery\phpunit.xml.dist" tests="14" assertions="38" errors="0" failures="0" skipped="0" time="0.071459">
+    <testsuite name="App" tests="14" assertions="38" errors="0" failures="0" skipped="0" time="0.071459">
+      <testsuite name="ExampleDatabaseTest" file="D:\MAMP\Spark-Awards-Gallery\tests\database\ExampleDatabaseTest.php" tests="2" assertions="3" errors="0" failures="0" skipped="0" time="0.048031">
+        <testcase name="testModelFindAll" file="D:\MAMP\Spark-Awards-Gallery\tests\database\ExampleDatabaseTest.php" line="17" class="ExampleDatabaseTest" classname="ExampleDatabaseTest" assertions="1" time="0.040859"/>
+        <testcase name="testSoftDeleteLeavesRow" file="D:\MAMP\Spark-Awards-Gallery\tests\database\ExampleDatabaseTest.php" line="28" class="ExampleDatabaseTest" classname="ExampleDatabaseTest" assertions="2" time="0.007172"/>
+      </testsuite>
+      <testsuite name="ExampleSessionTest" file="D:\MAMP\Spark-Awards-Gallery\tests\session\ExampleSessionTest.php" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.001228">
+        <testcase name="testSessionSimple" file="D:\MAMP\Spark-Awards-Gallery\tests\session\ExampleSessionTest.php" line="10" class="ExampleSessionTest" classname="ExampleSessionTest" assertions="1" time="0.001228"/>
+      </testsuite>
+      <testsuite name="GalleryControllerTest" file="D:\MAMP\Spark-Awards-Gallery\tests\unit\GalleryControllerTest.php" tests="3" assertions="9" errors="0" failures="0" skipped="0" time="0.004810">
+        <testcase name="testNormalizeEntryAcceptsUuidAndNumeric" file="D:\MAMP\Spark-Awards-Gallery\tests\unit\GalleryControllerTest.php" line="11" class="GalleryControllerTest" classname="GalleryControllerTest" assertions="3" time="0.002240"/>
+        <testcase name="testWinnerEntryUrlKeepsWinnerContext" file="D:\MAMP\Spark-Awards-Gallery\tests\unit\GalleryControllerTest.php" line="25" class="GalleryControllerTest" classname="GalleryControllerTest" assertions="3" time="0.001598"/>
+        <testcase name="testCompUrlSupportsPagination" file="D:\MAMP\Spark-Awards-Gallery\tests\unit\GalleryControllerTest.php" line="39" class="GalleryControllerTest" classname="GalleryControllerTest" assertions="3" time="0.000972"/>
+      </testsuite>
+      <testsuite name="GalleryFrontendSmokeTest" file="D:\MAMP\Spark-Awards-Gallery\tests\unit\GalleryFrontendSmokeTest.php" tests="3" assertions="8" errors="0" failures="0" skipped="0" time="0.006444">
+        <testcase name="testFooterLoadsGalleryUiBundle" file="D:\MAMP\Spark-Awards-Gallery\tests\unit\GalleryFrontendSmokeTest.php" line="10" class="GalleryFrontendSmokeTest" classname="GalleryFrontendSmokeTest" assertions="2" time="0.004445"/>
+        <testcase name="testGridContainsInfiniteScrollHooks" file="D:\MAMP\Spark-Awards-Gallery\tests\unit\GalleryFrontendSmokeTest.php" line="18" class="GalleryFrontendSmokeTest" classname="GalleryFrontendSmokeTest" assertions="3" time="0.001051"/>
+        <testcase name="testDetailsContainsModalHooks" file="D:\MAMP\Spark-Awards-Gallery\tests\unit\GalleryFrontendSmokeTest.php" line="27" class="GalleryFrontendSmokeTest" classname="GalleryFrontendSmokeTest" assertions="3" time="0.000947"/>
+      </testsuite>
+      <testsuite name="GalleryVisualContractTest" file="D:\MAMP\Spark-Awards-Gallery\tests\unit\GalleryVisualContractTest.php" tests="3" assertions="14" errors="0" failures="0" skipped="0" time="0.002861">
+        <testcase name="testGalleryCssContainsCriticalCardLayoutRules" file="D:\MAMP\Spark-Awards-Gallery\tests\unit\GalleryVisualContractTest.php" line="10" class="GalleryVisualContractTest" classname="GalleryVisualContractTest" assertions="4" time="0.001059"/>
+        <testcase name="testGalleryCssContainsCriticalModalRules" file="D:\MAMP\Spark-Awards-Gallery\tests\unit\GalleryVisualContractTest.php" line="20" class="GalleryVisualContractTest" classname="GalleryVisualContractTest" assertions="5" time="0.000847"/>
+        <testcase name="testGalleryUiScriptContainsInfiniteScrollAndModalInit" file="D:\MAMP\Spark-Awards-Gallery\tests\unit\GalleryVisualContractTest.php" line="31" class="GalleryVisualContractTest" classname="GalleryVisualContractTest" assertions="5" time="0.000955"/>
+      </testsuite>
+      <testsuite name="HealthTest" file="D:\MAMP\Spark-Awards-Gallery\tests\unit\HealthTest.php" tests="2" assertions="3" errors="0" failures="0" skipped="0" time="0.008086">
+        <testcase name="testIsDefinedAppPath" file="D:\MAMP\Spark-Awards-Gallery\tests\unit\HealthTest.php" line="12" class="HealthTest" classname="HealthTest" assertions="1" time="0.001055"/>
+        <testcase name="testBaseUrlHasBeenSet" file="D:\MAMP\Spark-Awards-Gallery\tests\unit\HealthTest.php" line="17" class="HealthTest" classname="HealthTest" assertions="2" time="0.007031"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>

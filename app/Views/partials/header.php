@@ -1,10 +1,31 @@
 <!DOCTYPE html>
+<?php
+/** @var string|null $metaTitle */
+/** @var string|null $metaDescription */
+/** @var string|null $canonicalUrl */
+/** @var string|null $ogImage */
+?>
 <html class="avada-html-layout-wide avada-html-header-position-top awb-scroll" lang="en-US" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Galleries | Spark Awards - International Design Competition</title>
+    <title><?= esc($metaTitle ?? 'Galleries | Spark Awards - International Design Competition') ?></title>
+    <?php if (! empty($metaDescription)): ?>
+        <meta name="description" content="<?= esc($metaDescription) ?>" />
+    <?php endif; ?>
+    <?php if (! empty($canonicalUrl)): ?>
+        <link rel="canonical" href="<?= esc($canonicalUrl) ?>" />
+        <meta property="og:url" content="<?= esc($canonicalUrl) ?>" />
+    <?php endif; ?>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="<?= esc($metaTitle ?? 'Spark Awards Gallery') ?>" />
+    <?php if (! empty($metaDescription)): ?>
+        <meta property="og:description" content="<?= esc($metaDescription) ?>" />
+    <?php endif; ?>
+    <?php if (! empty($ogImage)): ?>
+        <meta property="og:image" content="<?= esc(gallery_media_url($ogImage)) ?>" />
+    <?php endif; ?>
 
     <link rel="dns-prefetch" href="//fonts.googleapis.com" />
     <link rel='stylesheet' id='ls-google-fonts-css' href='https://fonts.googleapis.com/css?family=Lato:100,300,regular,700,900%7COpen+Sans:300%7CIndie+Flower:regular%7COswald:300,regular,700&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />

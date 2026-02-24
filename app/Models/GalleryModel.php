@@ -6,17 +6,14 @@ use CodeIgniter\Model;
 
 class GalleryModel extends Model
 {
-    protected $DBGroup = 'default';
-    protected $table = 'comp_competitions';
-    protected $primaryKey = 'comp_id';
-    protected $returnType = 'array';
+    protected $DBGroup      = 'default';
+    protected $table        = 'comp_competitions';
+    protected $primaryKey   = 'comp_id';
+    protected $returnType   = 'array';
     protected $useTimestamps = false;
-    protected $allowedFields = []; // we’re using the Query Builder directly
+    protected $allowedFields = []; // Query Builder is used directly.
 
-    /**
-     * Get all competitions (grid) for a given year whose phase 1 is open.
-     */
-    public function getGalleryGrid(string $galleryYear)
+    public function getGalleryGrid(string $galleryYear): array
     {
         return $this->db
             ->table('comp_competitions a')
@@ -30,10 +27,7 @@ class GalleryModel extends Model
             ->getResultArray();
     }
 
-    /**
-     * Get all entries for a given year+type (excluding drafts/hidden).
-     */
-    public function getGalleryEntries(string $galleryYear, string $galleryType)
+    public function getGalleryEntries(string $galleryYear, string $galleryType): array
     {
         return $this->db
             ->table('comp_competitions a')
@@ -50,10 +44,7 @@ class GalleryModel extends Model
             ->getResultArray();
     }
 
-    /**
-     * Get winners for a year.
-     */
-    public function getGalleryWinners(string $galleryYear)
+    public function getGalleryWinners(string $galleryYear): array
     {
         return $this->db
             ->table('comp_competitions a')
@@ -69,10 +60,7 @@ class GalleryModel extends Model
             ->getResultArray();
     }
 
-    /**
-     * Get full details for a single entry.
-     */
-    public function getGalleryDetails(string $entryID)
+    public function getGalleryDetails(string $entryID): array
     {
         return $this->db
             ->table('comp_entries a')
@@ -80,13 +68,10 @@ class GalleryModel extends Model
             ->join('comp_users b', 'a.user_id = b.user_id')
             ->where('a.entry_id', $entryID)
             ->get()
-            ->getRowArray();
+            ->getRowArray() ?? [];
     }
 
-    /**
-     * Get the top (first) low-res photo for an entry.
-     */
-    public function getTopGalleryImages(string $entryID)
+    public function getTopGalleryImages(string $entryID): array
     {
         return $this->db
             ->table('comp_entry_photos')
@@ -97,10 +82,7 @@ class GalleryModel extends Model
             ->getResultArray();
     }
 
-    /**
-     * All low-res photos for an entry.
-     */
-    public function getGalleryImages(string $entryID)
+    public function getGalleryImages(string $entryID): array
     {
         return $this->db
             ->table('comp_entry_photos a')
@@ -113,10 +95,7 @@ class GalleryModel extends Model
             ->getResultArray();
     }
 
-    /**
-     * PDF certificates for an entry.
-     */
-    public function getGalleryCertificate(string $entryID)
+    public function getGalleryCertificate(string $entryID): array
     {
         return $this->db
             ->table('comp_entry_photos a')
@@ -129,9 +108,6 @@ class GalleryModel extends Model
             ->getResultArray();
     }
 
-    /**
-     * Random “featured” photos for entries of a given year/type.
-     */
     protected function randomPhotoBase(string $galleryYear, string $galleryType)
     {
         return $this->db
@@ -146,7 +122,7 @@ class GalleryModel extends Model
             ->where('c.entry_photo_order', 1);
     }
 
-    public function getRandomPhotos(string $galleryYear, string $galleryType)
+    public function getRandomPhotos(string $galleryYear, string $galleryType): array
     {
         return $this->randomPhotoBase($galleryYear, $galleryType)
             ->orderBy('a.comp_year', 'DESC')
@@ -154,7 +130,7 @@ class GalleryModel extends Model
             ->getResultArray();
     }
 
-    public function getRandomFeaturedPhotos(string $galleryYear, string $galleryType)
+    public function getRandomFeaturedPhotos(string $galleryYear, string $galleryType): array
     {
         return $this->randomPhotoBase($galleryYear, $galleryType)
             ->join('comp_retail_item_user d', 'b.entry_id = d.entry_id')
@@ -167,33 +143,7 @@ class GalleryModel extends Model
             ->getResultArray();
     }
 
-    public function getRandomWinnerPhotos(string $galleryYear)
-    {
-        return $this->randomPhotoBase($galleryYear, '')
-            ->where('b.entry_status', 'Winner')
-            ->join('comp_retail_item_user d', 'b.entry_id = d.entry_id')
-            ->groupStart()
-            ->where('d.retail_item_id', 4)
-            ->orWhere('d.retail_item_id', 7)
-            ->groupEnd()
-            ->orderBy('a.comp_year', 'DESC')
-            ->get()
-            ->getResultArray();
-    }
-
-    public function getRandomFeaturedWinnerPhotos(string $galleryYear)
-    {
-        return $this->randomPhotoBase($galleryYear, '')
-            ->where('b.entry_status', 'Winner')
-            ->orderBy('a.comp_year', 'DESC')
-            ->get()
-            ->getResultArray();
-    }
-
-    /**
-     * Get competition details by comp_id.
-     */
-    public function getCompByID(int $compID)
+    public function getCompByID(int $compID): array
     {
         return $this->db
             ->table('comp_competitions a')
@@ -201,27 +151,60 @@ class GalleryModel extends Model
             ->join('comp_type b', 'a.comp_type_id = b.comp_type_id')
             ->where('a.comp_id', $compID)
             ->get()
-            ->getRowArray();
+            ->getRowArray() ?? [];
     }
 
     /**
-     * Get a single comp_type_name.
+     * Returns competition rows indexed by comp_id.
+     *
+     * @param list<int> $compIDs
+     * @return array<int, array<string, mixed>>
      */
-    public function getCompTypeByID(int $compTypeID): string
+    public function getCompetitionsByIDs(array $compIDs): array
     {
-        $row = $this->db
-            ->table('comp_type')
-            ->select('comp_type_name')
-            ->where('comp_type_id', $compTypeID)
-            ->get()
-            ->getRowArray();
+        $compIDs = array_values(array_unique(array_filter(array_map('intval', $compIDs))));
+        if ($compIDs === []) {
+            return [];
+        }
 
-        return $row['comp_type_name'] ?? '';
+        $rows = $this->db
+            ->table('comp_competitions a')
+            ->select('a.*, b.comp_type_name')
+            ->join('comp_type b', 'a.comp_type_id = b.comp_type_id')
+            ->whereIn('a.comp_id', $compIDs)
+            ->get()
+            ->getResultArray();
+
+        $indexed = [];
+        foreach ($rows as $row) {
+            $indexed[(int) $row['comp_id']] = $row;
+        }
+
+        return $indexed;
     }
 
     /**
-     * Get winner_level_name for a given level ID.
+     * @param list<int> $designTypeIDs
+     * @return list<string>
      */
+    public function getDesignTypeNamesByIDs(array $designTypeIDs): array
+    {
+        $designTypeIDs = array_values(array_unique(array_filter(array_map('intval', $designTypeIDs))));
+        if ($designTypeIDs === []) {
+            return [];
+        }
+
+        $rows = $this->db
+            ->table('comp_design_types')
+            ->select('design_type_name')
+            ->whereIn('design_type_id', $designTypeIDs)
+            ->orderBy('design_type_name', 'ASC')
+            ->get()
+            ->getResultArray();
+
+        return array_values(array_column($rows, 'design_type_name'));
+    }
+
     public function getWinnerLevel(int $winnerLevelID): string
     {
         $row = $this->db
@@ -234,10 +217,7 @@ class GalleryModel extends Model
         return $row['winner_level_name'] ?? '';
     }
 
-    /**
-     * Search across entries/users.
-     */
-    public function gallerySearch(string $search)
+    public function gallerySearch(string $search): array
     {
         return $this->db
             ->table('comp_entries a')

@@ -1,4 +1,9 @@
-<?= view('partials/header') ?>
+<?= view('partials/header', [
+    'metaTitle' => $metaTitle ?? null,
+    'metaDescription' => $metaDescription ?? null,
+    'canonicalUrl' => $canonicalUrl ?? null,
+    'ogImage' => $ogImage ?? null,
+]) ?>
 <?= view('partials/nav') ?>
 
     <main id="main" class="clearfix">
@@ -87,7 +92,20 @@
                                         <!-- Dynamic include -->
                                         <?php
                                         if ($entry): ?>
-                                            <?= view('gallery/details', ['details' => $details, 'images' => $images]) ?>
+                                            <?= view('gallery/details', [
+                                                'details' => $details,
+                                                'images' => $images,
+                                                'certificate' => $certificate,
+                                                'compDetails' => $compDetails,
+                                                'designTypesList' => $designTypesList,
+                                                'prevLink' => $prevLink,
+                                                'nextLink' => $nextLink,
+                                                'year' => $year,
+                                                'isWinnerContext' => $isWinnerContext,
+                                                'youtubeEmbedId' => $youtubeEmbedId,
+                                                'winnerLevelName' => $winnerLevelName,
+                                                'backLink' => $backLink,
+                                            ]) ?>
 
                                         <?php
                                         elseif ($search): ?>
@@ -100,7 +118,7 @@
                                                     'tiles' => $tiles,
                                                     'typeLabel' => $typeLabel,
                                                     'year' => $year,
-                                                    'comp' => $comp
+                                                    'comp' => $comp,
                                                 ]
                                             ) ?>
                                         <?php

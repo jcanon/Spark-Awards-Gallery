@@ -137,7 +137,7 @@
     </a>
 </section>
 
-<script>jQuery('a.gallery').colorbox({rel:'gal'});</script>
+<script src="<?= base_url('js/gallery-ui.js') ?>"></script>
 
 </body>
 </html>

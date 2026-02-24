@@ -15,7 +15,7 @@
     <ul>
         <?php foreach ($results as $r): ?>
             <li>
-                <a href="<?= site_url("/gallery?year={$r['comp_year']}&entry={$r['entry_id']}") ?>">
+                <a href="<?= esc($r['link']) ?>">
                     <?= esc($r['design_name']) ?>
                 </a>
                 (<?= esc($r['comp_year']) ?> Spark:<?= esc($r['comp_type_name']) ?>)

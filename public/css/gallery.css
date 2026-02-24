@@ -58,3 +58,190 @@
     -moz-border-radius: 10px;
     border-radius: 10px;
 }
+
+/* Keep gallery cards aligned when titles vary in length. */
+.gallery-card-title-wrap {
+    height: 3.3em;
+    padding: 6px 6px 8px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.gallery-card-title {
+    display: block;
+    width: 100%;
+    line-height: 1.35;
+    max-height: 2.7em;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    hyphens: auto;
+}
+
+.gallery-infinite-hidden {
+    display: none !important;
+}
+
+.gallery-infinite-sentinel {
+    height: 24px;
+}
+
+.gallery-infinite-sentinel.gallery-infinite-complete {
+    display: none;
+}
+
+/* Modernized Colorbox skin for certificate popups only. */
+#colorbox.cbox-modern {
+    border-radius: 14px;
+    overflow: visible;
+}
+
+#colorbox.cbox-modern #cboxContent {
+    margin-top: 0;
+    border-radius: 14px;
+    background: #ffffff;
+    box-shadow: 0 18px 48px rgba(16, 24, 40, 0.22);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+#colorbox.cbox-modern #cboxLoadedContent {
+    margin: 0;
+    border: 0;
+    background: #ffffff;
+}
+
+#colorbox.cbox-modern .cboxIframe {
+    background: #ffffff;
+}
+
+#colorbox.cbox-modern #cboxClose {
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.14);
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 12px rgba(16, 24, 40, 0.28);
+    text-indent: 0;
+    color: transparent;
+    z-index: 10010;
+}
+
+#colorbox.cbox-modern #cboxClose::before {
+    content: 'x';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #212529;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+#colorbox.cbox-modern #cboxClose:hover {
+    background: #f8f9fa;
+    transform: scale(1.04);
+}
+
+#colorbox.cbox-modern #cboxTitle,
+#colorbox.cbox-modern #cboxCurrent,
+#colorbox.cbox-modern #cboxSlideshow {
+    display: none !important;
+}
+
+#colorbox.cbox-certificate #cboxPrevious,
+#colorbox.cbox-certificate #cboxNext {
+    display: none !important;
+}
+
+#colorbox.cbox-gallery #cboxPrevious,
+#colorbox.cbox-gallery #cboxNext {
+    position: absolute;
+    top: 50%;
+    width: 42px;
+    height: 42px;
+    margin-top: -21px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.14);
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 12px rgba(16, 24, 40, 0.28);
+    text-indent: 0;
+    color: transparent;
+    z-index: 10010;
+}
+
+#colorbox.cbox-gallery #cboxPrevious {
+    left: 10px;
+}
+
+#colorbox.cbox-gallery #cboxNext {
+    right: 10px;
+}
+
+#colorbox.cbox-gallery #cboxPrevious::before,
+#colorbox.cbox-gallery #cboxNext::before {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #212529;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+#colorbox.cbox-gallery #cboxPrevious::before {
+    content: '\2039';
+}
+
+#colorbox.cbox-gallery #cboxNext::before {
+    content: '\203A';
+}
+
+#colorbox.cbox-gallery #cboxPrevious:hover,
+#colorbox.cbox-gallery #cboxNext:hover {
+    background: #f8f9fa;
+    transform: scale(1.04);
+}
+
+#colorbox.cbox-gallery #cboxLoadedContent {
+    max-width: 85vw !important;
+    max-height: 85vh !important;
+}
+
+#colorbox.cbox-gallery .cboxPhoto {
+    max-width: 85vw !important;
+    max-height: 85vh !important;
+    width: auto !important;
+    height: auto !important;
+}
+
+#cboxOverlay {
+    background: rgba(15, 23, 42, 0.65);
+}
+
+@media (max-width: 768px) {
+    #colorbox.cbox-modern #cboxClose {
+        top: 8px;
+        right: 8px;
+    }
+
+    #colorbox.cbox-gallery #cboxPrevious {
+        left: 8px;
+    }
+
+    #colorbox.cbox-gallery #cboxNext {
+        right: 8px;
+    }
+}
