@@ -130,6 +130,23 @@
             speed: 180,
             opacity: 0.55
         });
+
+        $(document)
+            .off('click.galleryBadgeModal', 'a.badge-image-popup')
+            .on('click.galleryBadgeModal', 'a.badge-image-popup', function(event) {
+                event.preventDefault();
+                $.colorbox({
+                    href: $(this).attr('href'),
+                    photo: true,
+                    className: 'cbox-modern cbox-certificate',
+                    transition: 'fade',
+                    speed: 180,
+                    opacity: 0.55,
+                    maxWidth: '85%',
+                    maxHeight: '85%',
+                    scalePhotos: true
+                });
+        });
     }
 
     if (document.readyState === 'loading') {

@@ -142,6 +142,7 @@ class ContentSecurityPolicy extends BaseConfig
         'self',
         'https://www.youtube.com',
         'https://www.youtube-nocookie.com',
+        'https://player.vimeo.com',
     ];
 
     /**

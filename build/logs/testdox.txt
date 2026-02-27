@@ -1,15 +1,3 @@
-Example Database
- [x] Model find all
- [x] Soft delete leaves row
-
-Example Session
- [x] Session simple
-
-Gallery Controller
- [x] Normalize entry accepts uuid and numeric
- [x] Winner entry url keeps winner context
- [x] Comp url supports pagination
-
 Gallery Frontend Smoke
  [x] Footer loads gallery ui bundle
  [x] Grid contains infinite scroll hooks
@@ -19,8 +7,4 @@ Gallery Visual Contract
  [x] Gallery css contains critical card layout rules
  [x] Gallery css contains critical modal rules
  [x] Gallery ui script contains infinite scroll and modal init
-
-Health
- [x] Is defined app path
- [x] Base url has been set
 

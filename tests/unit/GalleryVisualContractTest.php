@@ -37,5 +37,7 @@ final class GalleryVisualContractTest extends CIUnitTestCase
         $this->assertStringContainsString('IntersectionObserver', $js);
         $this->assertStringContainsString("$('a.gallery').colorbox", $js);
         $this->assertStringContainsString("$('a.certificate-pdf-popup').colorbox", $js);
+        $this->assertStringContainsString('click.galleryBadgeModal', $js);
+        $this->assertStringContainsString('a.badge-image-popup', $js);
     }
 }

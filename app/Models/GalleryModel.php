@@ -108,6 +108,19 @@ class GalleryModel extends Model
             ->getResultArray();
     }
 
+    public function getGalleryBadges(string $entryID): array
+    {
+        return $this->db
+            ->table('comp_entry_photos a')
+            ->select('a.*')
+            ->join('comp_entries b', 'a.entry_id = b.entry_id')
+            ->where('b.entry_id', $entryID)
+            ->where('a.entry_photo_res', 'Badge')
+            ->orderBy('a.entry_photo_order', 'ASC')
+            ->get()
+            ->getResultArray();
+    }
+
     protected function randomPhotoBase(string $galleryYear, string $galleryType)
     {
         return $this->db

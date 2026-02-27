@@ -3,13 +3,14 @@
 /** @var array $compDetails */
 /** @var array $images */
 /** @var array $certificate */
+/** @var array $badges */
 /** @var string $designTypesList */
 /** @var string $winnerLevelName */
 /** @var string|null $prevLink */
 /** @var string|null $nextLink */
 /** @var int $year */
 /** @var bool $isWinnerContext */
-/** @var string|null $youtubeEmbedId */
+/** @var array|null $videoEmbed */
 /** @var string|null $backLink */
 ?>
 
@@ -81,15 +82,16 @@
 
                 <p><?= nl2br(esc($details['full_description'] ?: $details['short_description'])) ?></p>
 
-                <?php if (! empty($youtubeEmbedId)): ?>
+                <?php if (! empty($videoEmbed['embed_url'])): ?>
                     <div style="padding:15px 0;">
                         <iframe
                             width="600"
                             height="450"
-                            src="https://www.youtube.com/embed/<?= esc($youtubeEmbedId) ?>"
-                            title="YouTube video"
+                            src="<?= esc((string) $videoEmbed['embed_url']) ?>"
+                            title="<?= esc((string) $details['design_name']) ?> video"
                             loading="lazy"
                             referrerpolicy="strict-origin-when-cross-origin"
+                            allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
                             allowfullscreen>
                         </iframe>
                     </div>
@@ -109,10 +111,6 @@
 
         <div class="fusion-column-last" style="width:30%;float:right;margin-bottom:20px;">
             <div class="fusion-column-wrapper" style="text-align:right;">
-                <?php if (! empty($backLink)): ?>
-                    <p><a href="<?= esc($backLink) ?>">&laquo; Back to List</a></p>
-                <?php endif; ?>
-
                 <p>
                     <?php if ($prevLink): ?>
                         <a href="<?= esc($prevLink) ?>">&laquo; Previous Entry</a>
@@ -148,6 +146,24 @@
                             </a>
                         </p>
                     <?php endforeach; ?>
+                <?php endif; ?>
+
+                <?php if (! empty($badges)): ?>
+                    <div class="entry-badge-wrap" style="text-align:center;width:100%;">
+                        <?php foreach ($badges as $badge): ?>
+                            <?php $badgeImage = gallery_media_url((string) ($badge['entry_photo'] ?? '')); ?>
+                            <?php if ($badgeImage === null || $badgeImage === ''): ?>
+                                <?php continue; ?>
+                            <?php endif; ?>
+                            <div class="entry-badge-preview" style="text-align:center;padding:24px 0;">
+                                <img
+                                    src="<?= esc($badgeImage) ?>"
+                                    alt="Competition Badge"
+                                    width="220"
+                                    style="display:block;border:0;max-width:100%;height:auto;">
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
                 <?php endif; ?>
 
             </div>

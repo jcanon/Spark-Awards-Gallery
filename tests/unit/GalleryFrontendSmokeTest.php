@@ -31,5 +31,6 @@ final class GalleryFrontendSmokeTest extends CIUnitTestCase
         $this->assertIsString($details);
         $this->assertStringContainsString('class="gallery"', $details);
         $this->assertStringContainsString('certificate-pdf-popup', $details);
+        $this->assertStringContainsString('badge-image-popup', $details);
     }
 }

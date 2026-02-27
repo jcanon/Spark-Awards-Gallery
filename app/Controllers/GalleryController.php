@@ -121,10 +121,11 @@ class GalleryController extends BaseController
             $data['details']         = $details;
             $data['images']          = $images;
             $data['certificate']     = $model->getGalleryCertificate($entry);
+            $data['badges']          = $model->getGalleryBadges($entry);
             $data['compDetails']     = $compDetails;
             $data['designTypesList'] = $designTypesList;
             $data['isWinnerContext'] = $isWinnerContext;
-            $data['youtubeEmbedId']  = $this->extractYoutubeEmbedId((string) ($details['youtube_url'] ?? ''));
+            $data['videoEmbed']      = $this->getVideoEmbedData((string) ($details['youtube_url'] ?? ''));
             $data['winnerLevelName'] = $winnerLevelName;
             $data['backLink']        = $backLink;
             $data['metaTitle']       = trim((string) $details['design_name']) . ' | Spark Awards Galleries';
@@ -352,36 +353,118 @@ class GalleryController extends BaseController
         return site_url('gallery?' . http_build_query($query));
     }
 
-    private function extractYoutubeEmbedId(string $urlOrId): ?string
+    private function parseHost(string $url): string
     {
-        $value = trim($urlOrId);
-        if ($value === '') {
+        return strtolower((string) (parse_url($url, PHP_URL_HOST) ?? ''));
+    }
+
+    private function parsePath(string $url): string
+    {
+        return (string) (parse_url($url, PHP_URL_PATH) ?? '');
+    }
+
+    private function extractYoutubeId(string $raw): ?string
+    {
+        $raw = trim($raw);
+        if ($raw === '') {
             return null;
         }
 
-        if (preg_match('/^[A-Za-z0-9_-]{11}$/', $value) === 1) {
-            return $value;
+        // Legacy support: older rows may still hold plain YouTube IDs.
+        if (preg_match('/^[A-Za-z0-9_-]{6,25}$/', $raw) === 1 && ! ctype_digit($raw)) {
+            return $raw;
         }
 
-        $parts = parse_url($value);
-        if (! is_array($parts)) {
+        $host = $this->parseHost($raw);
+        $path = trim($this->parsePath($raw), '/');
+        $id   = null;
+
+        if ($host === 'youtu.be' || $host === 'www.youtu.be') {
+            $id = $path !== '' ? explode('/', $path)[0] : null;
+        } elseif (
+            str_ends_with($host, 'youtube.com') ||
+            str_ends_with($host, 'youtube-nocookie.com')
+        ) {
+            if (str_starts_with($path, 'watch')) {
+                parse_str((string) (parse_url($raw, PHP_URL_QUERY) ?? ''), $query);
+                $id = isset($query['v']) ? (string) $query['v'] : null;
+            } elseif (preg_match('~^(?:embed|shorts|live)/([^/?#]+)~i', $path, $m) === 1) {
+                $id = (string) $m[1];
+            }
+        }
+
+        if ($id === null) {
             return null;
         }
 
-        if (! empty($parts['query'])) {
-            parse_str($parts['query'], $query);
-            $videoId = $query['v'] ?? null;
-            if (is_string($videoId) && preg_match('/^[A-Za-z0-9_-]{11}$/', $videoId) === 1) {
-                return $videoId;
-            }
+        return preg_match('/^[A-Za-z0-9_-]{6,25}$/', $id) === 1 ? $id : null;
+    }
+
+    private function extractVimeoId(string $raw): ?string
+    {
+        $raw = trim($raw);
+        if ($raw === '') {
+            return null;
         }
 
-        if (! empty($parts['path'])) {
-            $path = trim($parts['path'], '/');
-            $path = str_starts_with($path, 'embed/') ? substr($path, 6) : $path;
-            if (preg_match('/^[A-Za-z0-9_-]{11}$/', $path) === 1) {
-                return $path;
-            }
+        $host = $this->parseHost($raw);
+        if ($host === '' || strpos($host, 'vimeo.com') === false) {
+            return null;
+        }
+
+        $path = $this->parsePath($raw);
+        if ($path === '') {
+            return null;
+        }
+
+        if (preg_match('~(?:^|/)(?:video/)?(\d+)(?:$|[/?#])~i', $path, $m) !== 1) {
+            return null;
+        }
+
+        return (string) $m[1];
+    }
+
+    private function getVideoEmbedData(?string $value): ?array
+    {
+        $raw = trim((string) $value);
+        if ($raw === '') {
+            return null;
+        }
+
+        if (preg_match('/^(?:youtube|yt):([A-Za-z0-9_-]{6,25})$/i', $raw, $m) === 1) {
+            $youtubeId = (string) $m[1];
+            return [
+                'provider'  => 'youtube',
+                'id'        => $youtubeId,
+                'embed_url' => 'https://www.youtube.com/embed/' . $youtubeId,
+            ];
+        }
+
+        if (preg_match('/^(?:vimeo|vm):(\d{3,20})$/i', $raw, $m) === 1) {
+            $vimeoId = (string) $m[1];
+            return [
+                'provider'  => 'vimeo',
+                'id'        => $vimeoId,
+                'embed_url' => 'https://player.vimeo.com/video/' . $vimeoId,
+            ];
+        }
+
+        $youtubeId = $this->extractYoutubeId($raw);
+        if ($youtubeId !== null) {
+            return [
+                'provider'  => 'youtube',
+                'id'        => $youtubeId,
+                'embed_url' => 'https://www.youtube.com/embed/' . $youtubeId,
+            ];
+        }
+
+        $vimeoId = $this->extractVimeoId($raw);
+        if ($vimeoId !== null) {
+            return [
+                'provider'  => 'vimeo',
+                'id'        => $vimeoId,
+                'embed_url' => 'https://player.vimeo.com/video/' . $vimeoId,
+            ];
         }
 
         return null;

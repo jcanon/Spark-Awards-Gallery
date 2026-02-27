@@ -96,6 +96,21 @@
     display: none;
 }
 
+.entry-badge-preview {
+    text-align: center;
+    margin: 12px 0;
+}
+
+.entry-badge-preview a {
+    display: inline-block;
+}
+
+.entry-badge-preview img {
+    display: block;
+    margin: 0 auto;
+    border: 0 !important;
+}
+
 /* Modernized Colorbox skin for certificate popups only. */
 #colorbox.cbox-modern {
     border-radius: 14px;
