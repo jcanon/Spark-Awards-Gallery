@@ -179,6 +179,9 @@ class GalleryController extends BaseController
                         fn () => $this->timed('gallery.winners', fn () => $model->getGalleryWinners((string) $year)),
                         self::CACHE_TTL_MEDIUM
                     );
+                    if ($records === []) {
+                        log_message('warning', 'No winner records found for year={year}', ['year' => (string) $year]);
+                    }
                     $typeLabel = "{$year} Winners";
                 } else {
                     $competition = $this->cachedValue(
@@ -213,6 +216,10 @@ class GalleryController extends BaseController
                         'isWinner' => $isWinnerScope,
                         'link'     => $this->buildEntryUrl($year, $tileComp, (string) $record['entry_id']),
                     ];
+                }
+
+                if ($isWinnerScope && $tiles === []) {
+                    log_message('warning', 'Winner records had no gallery thumbnails for year={year}', ['year' => (string) $year]);
                 }
 
                 $data['metaTitle']       = ($typeLabel ?: 'Gallery') . ' | Spark Awards';
