@@ -137,7 +137,8 @@
     </a>
 </section>
 
-<script src="<?= base_url('js/gallery-ui.js') ?>"></script>
+<?php $galleryUiVersion = @filemtime(FCPATH . 'js/gallery-ui.js') ?: time(); ?>
+<script src="<?= base_url('js/gallery-ui.js?v=' . $galleryUiVersion) ?>"></script>
 
 </body>
 </html>

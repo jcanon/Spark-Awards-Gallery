@@ -5,6 +5,7 @@
 /** @var string|null $typeLabel */
 
 $rowcntr = 0;
+$isWinnerGrid = ($comp === 'Winners');
 ?>
 
 <?php if ($comp !== ''): ?>
@@ -16,8 +17,8 @@ $rowcntr = 0;
 </p>
 <?php endif; ?>
 
-<div class="awb-gallery-wrapper awb-gallery-wrapper-1 button-span-no<?= $comp === 'Winners' ? ' winners-grid-fallback' : '' ?>">
-    <div class="fusion-gallery fusion-gallery-container fusion-grid-3 fusion-columns-total-4 fusion-gallery-layout-grid fusion-gallery-1">
+<div class="awb-gallery-wrapper awb-gallery-wrapper-1 button-span-no<?= $isWinnerGrid ? ' winners-grid-fallback' : '' ?>">
+    <div class="fusion-gallery fusion-gallery-container fusion-grid-3 fusion-columns-total-4 fusion-gallery-1<?= $isWinnerGrid ? ' winners-gallery-static' : ' fusion-gallery-layout-grid' ?>">
         <div class="fusion-grid-column fusion-gallery-column fusion-gallery-column-3"></div>
         <div class="fusion-grid-column fusion-gallery-column fusion-gallery-column-3 hover-type-zoomin fusion-grid-sizer"></div>
 

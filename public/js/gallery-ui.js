@@ -12,6 +12,7 @@
         if (!container) {
             return;
         }
+        var disableIsotope = !!(container.closest && container.closest('.winners-grid-fallback'));
 
         var initialCount = 18;
         var batchSize = 12;
@@ -28,6 +29,10 @@
         };
 
         var ensureIsotope = function($container) {
+            if (disableIsotope) {
+                return false;
+            }
+
             if (!$ || !$container || !$container.length || typeof $container.isotope !== 'function') {
                 return false;
             }

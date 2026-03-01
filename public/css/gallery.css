@@ -107,11 +107,11 @@
 }
 
 /* Winners grid can receive absolute positioning from gallery scripts; keep cards visible. */
-.winners-grid-fallback .fusion-gallery-container.fusion-gallery-layout-grid {
+.winners-grid-fallback .fusion-gallery-container {
     height: auto !important;
 }
 
-.winners-grid-fallback .fusion-gallery-container.fusion-gallery-layout-grid .fusion-element-grid {
+.winners-grid-fallback .fusion-gallery-container .fusion-element-grid {
     position: relative !important;
     left: auto !important;
     top: auto !important;

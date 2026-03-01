@@ -4,6 +4,9 @@
 /** @var string|null $metaDescription */
 /** @var string|null $canonicalUrl */
 /** @var string|null $ogImage */
+$galleryCssVersion = @filemtime(FCPATH . 'css/gallery.css') ?: time();
+$colorboxCssVersion = @filemtime(FCPATH . 'css/colorbox.css') ?: $galleryCssVersion;
+$colorboxJsVersion = @filemtime(FCPATH . 'js/jquery.colorbox-min.js') ?: $galleryCssVersion;
 ?>
 <html class="avada-html-layout-wide avada-html-header-position-top awb-scroll" lang="en-US" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
 <head>
@@ -114,9 +117,9 @@
     <script type="text/javascript" src="/js/jquery/jquery.min.js?ver=3.7.1" id="jquery-core-js"></script>
     <script type="text/javascript" src="/js/jquery/jquery-migrate.min.js?ver=3.4.1" id="jquery-migrate-js"></script>
 
-    <link rel="stylesheet" href="/css/gallery.css">
-    <link rel="stylesheet" href="/css/colorbox.css">
-    <script src="/js/jquery.colorbox-min.js"></script>
+    <link rel="stylesheet" href="/css/gallery.css?v=<?= esc((string) $galleryCssVersion) ?>">
+    <link rel="stylesheet" href="/css/colorbox.css?v=<?= esc((string) $colorboxCssVersion) ?>">
+    <script src="/js/jquery.colorbox-min.js?v=<?= esc((string) $colorboxJsVersion) ?>"></script>
 </head>
 
 <body class="page-template-default page page-id-18476 fusion-image-hovers fusion-body ltr fusion-sticky-header no-mobile-slidingbar no-mobile-totop fusion-disable-outline fusion-sub-menu-slide mobile-logo-pos-left layout-wide-mode fusion-top-header menu-text-align-center mobile-menu-design-modern fusion-show-pagination-text fusion-header-layout-v3 avada-responsive avada-footer-fx-sticky fusion-search-form-clean fusion-avatar-square">
