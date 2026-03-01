@@ -57,6 +57,7 @@ class ContentSecurityPolicy extends BaseConfig
     public $scriptSrc = [
         'self',
         'https://www.sparkawards.com',
+        'https://competitions.sparkawards.com',
         'https://www.youtube.com',
     ];
 
@@ -80,6 +81,7 @@ class ContentSecurityPolicy extends BaseConfig
         'self',
         'data:',
         'https://www.sparkawards.com',
+        'https://competitions.sparkawards.com',
         'https://img.youtube.com',
         'https://i.ytimg.com',
         'https://i.vimeocdn.com',
@@ -126,6 +128,7 @@ class ContentSecurityPolicy extends BaseConfig
         'https://fonts.gstatic.com',
         'https://fonts.googleapis.com',
         'https://www.sparkawards.com',
+        'https://competitions.sparkawards.com',
         'https://sparkawards.com',
         'https://spark-awards-gallery.local',
         'https://spark-awards-competition.local',

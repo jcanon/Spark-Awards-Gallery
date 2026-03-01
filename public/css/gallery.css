@@ -3,6 +3,16 @@
     color: #000000;
 }
 
+/* Keep Avada icon fonts same-origin to avoid cross-domain CORS failures. */
+@font-face {
+    font-family: 'awb-icons';
+    src: url('/theme/Avada/includes/lib/assets/fonts/icomoon/awb-icons.woff') format('woff'),
+         url('/theme/Avada/includes/lib/assets/fonts/icomoon/awb-icons.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 .fusion-button {
     border-width: 0px;
     border-color: #000000;

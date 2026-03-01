@@ -23,13 +23,42 @@
             }
         });
 
+        var hasIsotopeInstance = function($container) {
+            return !!($container && $container.length && $container.data('isotope'));
+        };
+
+        var ensureIsotope = function($container) {
+            if (!$ || !$container || !$container.length || typeof $container.isotope !== 'function') {
+                return false;
+            }
+
+            if (hasIsotopeInstance($container)) {
+                return true;
+            }
+
+            try {
+                $container.isotope({
+                    itemSelector: '.fusion-element-grid',
+                    layoutMode: 'masonry',
+                    percentPosition: true,
+                    masonry: {
+                        columnWidth: '.fusion-grid-sizer'
+                    }
+                });
+            } catch (e) {
+                return false;
+            }
+
+            return hasIsotopeInstance($container);
+        };
+
         var relayout = function() {
             if (!$) {
                 return;
             }
 
             var $container = $(container);
-            if (typeof $container.isotope === 'function') {
+            if (ensureIsotope($container)) {
                 try {
                     $container.isotope('reloadItems');
                     $container.isotope('layout');
