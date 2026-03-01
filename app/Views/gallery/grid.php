@@ -64,4 +64,7 @@ $rowcntr = 0;
         <?php endforeach; ?>
     </div>
 </div>
+<?php if ($rowcntr === 0): ?>
+<p>No gallery entries are available for this selection yet.</p>
+<?php endif; ?>
 <div class="gallery-infinite-sentinel" aria-hidden="true"></div>
