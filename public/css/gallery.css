@@ -118,6 +118,45 @@
     transform: none !important;
 }
 
+/* Winners grid bypasses Avada gallery JS; force card columns visible. */
+.winners-grid-fallback .winners-gallery-static .fusion-gallery-column {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.winners-grid-fallback .winners-gallery-static .fusion-grid-sizer {
+    display: none !important;
+}
+
+/* Winners fallback layout: keep a 3-col responsive grid without JS masonry positioning. */
+.winners-grid-fallback .winners-gallery-static {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.winners-grid-fallback .winners-gallery-static .fusion-element-grid {
+    width: 33.3333%;
+    box-sizing: border-box;
+}
+
+.winners-grid-fallback .winners-gallery-static .clearfix {
+    display: none !important;
+}
+
+@media (max-width: 1024px) {
+    .winners-grid-fallback .winners-gallery-static .fusion-element-grid {
+        width: 50%;
+    }
+}
+
+@media (max-width: 640px) {
+    .winners-grid-fallback .winners-gallery-static .fusion-element-grid {
+        width: 100%;
+    }
+}
+
 .entry-badge-preview {
     text-align: center;
     margin: 12px 0;
