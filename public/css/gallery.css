@@ -106,6 +106,18 @@
     display: none;
 }
 
+/* Winners grid can receive absolute positioning from gallery scripts; keep cards visible. */
+.winners-grid-fallback .fusion-gallery-container.fusion-gallery-layout-grid {
+    height: auto !important;
+}
+
+.winners-grid-fallback .fusion-gallery-container.fusion-gallery-layout-grid .fusion-element-grid {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+}
+
 .entry-badge-preview {
     text-align: center;
     margin: 12px 0;
