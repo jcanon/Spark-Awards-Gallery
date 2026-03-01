@@ -9,9 +9,9 @@
                         </p>
 
                         <a href="https://www.sparkawards.com/privacy-policy/" alt="Privacy Policy" title="Privacy Policy">Privacy Policy</a>
-                        |
+                        &nbsp;|&nbsp;
                         <a href="https://www.sparkawards.com/terms-conditions/" alt="Terms & Conditions" title="Terms & Conditions">Terms & Conditions</a>
-                        |
+                        &nbsp;|&nbsp;
                         <a href="https://www.jcanon.org/" alt="Jessie Canon | JCanon.org" title="Jessie Canon | JCanon.org">Web Development</a>
                     </div>
                 </div>
