@@ -1,6 +1,14 @@
 (function(window, document, $) {
     'use strict';
 
+    function isSameOrigin(url) {
+        try {
+            return new URL(url, window.location.href).origin === window.location.origin;
+        } catch (e) {
+            return false;
+        }
+    }
+
     function initInfiniteScroll() {
         var items = Array.from(document.querySelectorAll('.js-infinite-item'));
         var sentinel = document.querySelector('.gallery-infinite-sentinel');
@@ -154,7 +162,12 @@
             scalePhotos: true
         });
 
-        $('a.certificate-pdf-popup').colorbox({
+        var $certificateLinks = $('a.certificate-pdf-popup');
+        var $certificatePopupLinks = $certificateLinks.filter(function() {
+            return isSameOrigin($(this).attr('href'));
+        });
+
+        $certificatePopupLinks.colorbox({
             iframe: true,
             className: 'cbox-modern cbox-certificate',
             width: '85%',
@@ -163,6 +176,11 @@
             transition: 'fade',
             speed: 180,
             opacity: 0.55
+        });
+
+        $certificateLinks.not($certificatePopupLinks).attr({
+            target: '_blank',
+            rel: 'noopener noreferrer'
         });
 
         $(document)

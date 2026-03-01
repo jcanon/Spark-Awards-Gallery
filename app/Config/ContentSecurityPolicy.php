@@ -47,7 +47,11 @@ class ContentSecurityPolicy extends BaseConfig
      *
      * @var list<string>|string|null
      */
-    public $defaultSrc;
+    public $defaultSrc = [
+        'self',
+        'https://sparkawards.com',
+        'https://*.sparkawards.com',
+    ];
 
     /**
      * Lists allowed scripts' URLs.
@@ -57,6 +61,8 @@ class ContentSecurityPolicy extends BaseConfig
     public $scriptSrc = [
         'self',
         'https://www.sparkawards.com',
+        'https://sparkawards.com',
+        'https://*.sparkawards.com',
         'https://competitions.sparkawards.com',
         'https://www.youtube.com',
     ];
@@ -68,6 +74,8 @@ class ContentSecurityPolicy extends BaseConfig
      */
     public $styleSrc = [
         'self',
+        'https://sparkawards.com',
+        'https://*.sparkawards.com',
         'https://fonts.googleapis.com',
         'unsafe-inline',
     ];
@@ -81,6 +89,8 @@ class ContentSecurityPolicy extends BaseConfig
         'self',
         'data:',
         'https://www.sparkawards.com',
+        'https://sparkawards.com',
+        'https://*.sparkawards.com',
         'https://competitions.sparkawards.com',
         'https://img.youtube.com',
         'https://i.ytimg.com',
@@ -101,7 +111,11 @@ class ContentSecurityPolicy extends BaseConfig
      *
      * @var list<string>|string
      */
-    public $childSrc = 'self';
+    public $childSrc = [
+        'self',
+        'https://sparkawards.com',
+        'https://*.sparkawards.com',
+    ];
 
     /**
      * Limits the origins that you can connect to (via XHR,
@@ -111,6 +125,8 @@ class ContentSecurityPolicy extends BaseConfig
      */
     public $connectSrc = [
         'self',
+        'https://sparkawards.com',
+        'https://*.sparkawards.com',
         'https://vimeo.com',
         'https://www.vimeo.com',
         'https://www.youtube.com',
@@ -128,6 +144,7 @@ class ContentSecurityPolicy extends BaseConfig
         'https://fonts.gstatic.com',
         'https://fonts.googleapis.com',
         'https://www.sparkawards.com',
+        'https://*.sparkawards.com',
         'https://competitions.sparkawards.com',
         'https://sparkawards.com',
         'https://spark-awards-gallery.local',
@@ -159,6 +176,8 @@ class ContentSecurityPolicy extends BaseConfig
      */
     public $frameSrc = [
         'self',
+        'https://sparkawards.com',
+        'https://*.sparkawards.com',
         'https://www.youtube.com',
         'https://www.youtube-nocookie.com',
         'https://player.vimeo.com',
@@ -171,6 +190,8 @@ class ContentSecurityPolicy extends BaseConfig
      */
     public $mediaSrc = [
         'self',
+        'https://sparkawards.com',
+        'https://*.sparkawards.com',
     ];
 
     /**
@@ -183,7 +204,11 @@ class ContentSecurityPolicy extends BaseConfig
     /**
      * @var list<string>|string|null
      */
-    public $manifestSrc;
+    public $manifestSrc = [
+        'self',
+        'https://sparkawards.com',
+        'https://*.sparkawards.com',
+    ];
 
     /**
      * Limits the kinds of plugins a page may invoke.
